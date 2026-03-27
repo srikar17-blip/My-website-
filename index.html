@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cricket Game</title>
+  <style>
+    body {
+      text-align: center;
+      background: green;
+      color: white;
+      font-family: Arial;
+    }
+
+    #ground {
+      position: relative;
+      width: 300px;
+      height: 500px;
+      margin: auto;
+      background: linear-gradient(green, darkgreen);
+      border: 2px solid white;
+      overflow: hidden;
+    }
+
+    #ball {
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 140px;
+    }
+
+    #bat {
+      position: absolute;
+      bottom: 20px;
+      left: 120px;
+      width: 60px;
+      height: 10px;
+      background: brown;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🏏 Cricket Game</h1>
+<p>Click "Hit" when ball reaches near bat!</p>
+
+<div id="ground">
+  <div id="ball"></div>
+  <div id="bat"></div>
+</div>
+
+<br>
+<button onclick="hitBall()">HIT</button>
+<p>Score: <span id="score">0</span></p>
+
+<script>
+let ball = document.getElementById("ball");
+let score = 0;
+let position = 0;
+
+function bowl() {
+  position = 0;
+  let interval = setInterval(() => {
+    position += 5;
+    ball.style.top = position + "px";
+
+    if (position > 480) {
+      clearInterval(interval);
+      setTimeout(bowl, 1000);
+    }
+  }, 50);
+}
+
+function hitBall() {
+  if (position > 400 && position < 480) {
+    score += 6;
+    document.getElementById("score").innerText = score;
+    alert("Great Shot! 🎉");
+  } else {
+    alert("Missed! 😢");
+  }
+}
+
+bowl();
+</script>
+
+</body>
+</html>
