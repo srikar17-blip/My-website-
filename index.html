@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Cricket Game</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #0b6623;
+      color: white;
+    }
+    #game {
+      margin-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #score {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body><h1>🏏 Mini Cricket Game</h1>
+<p>Click a shot and try to score runs!</p><div id="game">
+  <button onclick="playShot(1)">1 Run</button>
+  <button onclick="playShot(2)">2 Runs</button>
+  <button onclick="playShot(4)">4 Runs</button>
+  <button onclick="playShot(6)">6 Runs</button>
+</div><div id="score">Score: 0 | Balls: 0</div>
+<div id="result"></div><script>
+  let score = 0;
+  let balls = 0;
+
+  function playShot(run) {
+    if (balls >= 6) {
+      document.getElementById("result").innerText = "Over finished! Final Score: " + score;
+      return;
+    }
+
+    let chance = Math.random();
+    balls++;
+
+    if (chance < 0.2) {
+      document.getElementById("result").innerText = "OUT!";
+      balls = 6;
+    } else {
+      score += run;
+      document.getElementById("result").innerText = "You scored " + run + " run(s)!";
+    }
+
+    document.getElementById("score").innerText = "Score: " + score + " | Balls: " + balls;
+
+    if (balls === 6) {
+      document.getElementById("result").innerText += " | Over finished! Final Score: " + score;
+    }
+  }
+</script></body>
+</html>
